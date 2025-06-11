@@ -1,3 +1,7 @@
+@import url('./styles/App.css');
+@import url('./styles/MapComponent.css');
+@import url('./styles/LandInfoPanel.css');
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

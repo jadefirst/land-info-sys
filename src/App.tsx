@@ -1,9 +1,20 @@
-import React from 'react';
-import MapComponent from './components/Mapcomponent'
-import './App.css';
+import React, { useState } from 'react';
+import LandInfoPanel from './components/LandInfoPanel'
+import MapComponentView from './components/MapComponentPanel';
 import type { ClickInfo } from './utils/land';
 
 function App() {
+
+const [clickInfo, setClickInfo] = useState<ClickInfo | null>(null);
+const [loading, setLoading] = useState(false);
+
+const handleLocationClick = (info: ClickInfo) => {
+  setClickInfo(info)
+  console.log('App에서 받은 클릭 정보:', info);
+  
+}
+  
+  
   return (
     <div className="app">
       {/* 헤더 */}
@@ -17,16 +28,8 @@ function App() {
 
       {/* 메인 콘텐츠 */}
       <main className="main-content">
-        <MapComponent onLocationClick={function (ClickInfo: ClickInfo): void {
-          throw new Error('Function not implemented.');
-        } } loading={false}          
-        // onLocationClick={handleLocationClick}
-          // loading={loading}
-        />
-        {/* <LandInfoPanel 
-          clickInfo={clickInfo}
-          loading={loading}
-        /> */}
+        <MapComponentView onLocationClick={handleLocationClick} loading={loading} />
+        <LandInfoPanel clickInfo={clickInfo} loading={loading} /> 
       </main>
     </div>
   );

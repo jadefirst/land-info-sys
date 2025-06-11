@@ -1,0 +1,197 @@
+/* src/styles/LandInfoPanel.css */
+
+.info-panel {
+  width: 380px;
+  background: #ffffff;
+  padding: 24px;
+  overflow-y: auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+  margin: 12px 12px 12px 0;
+}
+
+.info-panel h2 {
+  color: #2d3748;
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+/* 정보 섹션 */
+.info-section {
+  margin-bottom: 20px;
+  padding: 16px;
+  background: #fafbfc;
+  border-radius: 8px;
+  border-left: 3px solid #a78bfa;
+  transition: all 0.2s ease;
+}
+
+.info-section:hover {
+  background: #f7fafc;
+  border-left-color: #8b5cf6;
+}
+
+.info-section h3 {
+  color: #4a5568;
+  margin-bottom: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* 정보 행 */
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.info-row:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.info-label {
+  font-weight: 600;
+  color: #718096;
+  font-size: 0.9rem;
+  min-width: 80px;
+}
+
+.info-value {
+  color: #2d3748;
+  font-weight: 500;
+  text-align: right;
+  max-width: 65%;
+  word-break: break-all;
+  font-size: 0.9rem;
+}
+
+/* 로딩 상태 */
+.info-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  color: #718096;
+  gap: 8px;
+}
+
+.loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #e2e8f0;
+  border-top: 2px solid #a78bfa;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* 기본 안내 메시지 */
+.info-placeholder {
+  text-align: center;
+  color: #718096;
+  padding: 32px 20px;
+  background: #fafbfc;
+  border-radius: 8px;
+  border: 2px dashed #cbd5e0;
+}
+
+.info-placeholder p {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.info-placeholder .emoji {
+  font-size: 2rem;
+  margin-bottom: 12px;
+  display: block;
+}
+
+/* 하이라이트 박스 */
+.highlight-box {
+  background: linear-gradient(135deg, #fef5e7, #fed7aa);
+  border: 1px solid #fdba74;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 20px;
+}
+
+.highlight-box strong {
+  color: #ea580c;
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.feature-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.feature-list li {
+  padding: 4px 0;
+  color: #9a3412;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.feature-list li:before {
+  content: "🔧";
+  font-size: 0.8rem;
+}
+
+/* 에러 상태 */
+.info-error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.info-error strong {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .info-panel {
+    width: 100%;
+    height: 40vh;
+    border-radius: 0;
+    margin: 0;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.06);
+  }
+  
+  .info-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  
+  .info-value {
+    max-width: 100%;
+    text-align: left;
+  }
+  
+  .info-label {
+    min-width: auto;
+  }
+}

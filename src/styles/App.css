@@ -1,3 +1,6 @@
+
+
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -137,12 +140,16 @@ body {
 }
 
 .map-container {
-  flex: 1 !important;
-  min-width: 60% !important;
+  flex: 2 !important;
+  min-width: 65% !important;
 }
 
 .info-panel {
-  width: 380px !important;
+  /* width: 380px !important;
   min-width: 380px !important;
+  flex-shrink: 0 !important; */
+  width: 350px !important;      /* 패널 너비 조금 줄임 */
+  min-width: 350px !important;
+  max-width: 35% !important;    /* 최대 35%만 차지 */
   flex-shrink: 0 !important;
 }
