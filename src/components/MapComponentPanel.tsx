@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { MapContainer, TileLayer, useMapEvents } from 'react-leaflet';
 import { type ClickInfo } from '../utils/land';
-import { getAddressFromCoordinates } from '../utils/vworldApi';
+import { getInvestmentScore } from '../utils/vworldApi';
 
 interface MapComponentProps {
   onLocationClick: (clickInfo: ClickInfo) => void;
@@ -24,8 +24,9 @@ function MapClickHandler({
       
       try {
         // VWorld API로 좌표 -> 주소 변환
-        const clickInfo = await getAddressFromCoordinates(lat, lng);
+        const clickInfo = await getInvestmentScore(lat, lng);
         onLocationClick(clickInfo);
+        console.error('clickInfo ::::::::::::', clickInfo);
       } catch (error) {
         console.error('위치 정보 조회 실패:', error);
         onLocationClick({

@@ -16,32 +16,31 @@ const LandInfoPanel: React.FC<LandInfoPanelProps> = ({ clickInfo, loading}) => {
   const [detailsLoading, setDetailsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-   
+
     // PNU가 있을 때 상세 정보 조회
-    useEffect(() => {
-        const fetchLandDetails = async() => {
-         if(!clickInfo?.pnu) {
-            setLandDetails(null)
-            return;
-        }   
+    // useEffect(() => {
+    //     const fetchLandDetails = async() => {
+    //      if(!clickInfo?.pnu) {
+    //         setLandDetails(null)
+    //         return;
+    //     }   
 
-        setDetailsLoading(true)
-        setError(null)
+    //     setDetailsLoading(true)
+    //     setError(null)
 
 
-        try {
-            const details = await getLandDetailsByPNU(clickInfo.pnu)
-            setLandDetails(details)
-        } catch (error) {
-            setError('토지 상세정보를 가져오는 중 오류가 발생했습니다.');
-            console.error('토지 상세정보 조회 실패:', error);           
-        } finally {
-            setDetailsLoading(false);
-        }
-        }
-        fetchLandDetails()
-    },[clickInfo?.pnu])
-   
+    //     try {
+    //         const details = await getLandDetailsByPNU(clickInfo.pnu)
+    //         setLandDetails(details)
+    //     } catch (error) {
+    //         setError('토지 상세정보를 가져오는 중 오류가 발생했습니다.');
+    //         console.error('토지 상세정보 조회 실패:', error);           
+    //     } finally {
+    //         setDetailsLoading(false);
+    //     }
+    //     }
+    //     fetchLandDetails()
+    // },[clickInfo?.pnu])
    
    
  if (!clickInfo) {
@@ -60,31 +59,59 @@ const LandInfoPanel: React.FC<LandInfoPanelProps> = ({ clickInfo, loading}) => {
           {error}
         </div>
       )}
-
-      {/* 위치 정보 */}
-      <div className="info-section">
-        <h3>🎯 클릭 위치</h3>
-        <div className="info-row">
-          <span className="info-label">위도:</span>
-          <span className="info-value">{clickInfo.lat.toFixed(6)}</span>
-        </div>
-        <div className="info-row">
-          <span className="info-label">경도:</span>
-          <span className="info-value">{clickInfo.lng.toFixed(6)}</span>
-        </div>
-      </div>
-
       {/* 주소 정보 */}
       <div className="info-section">
-        <h3>📍 주소 정보</h3>
+        <h3>🏠 주소 정보</h3>
         <div className="info-row">
           <span className="info-label">주소:</span>
           <span className="info-value">{clickInfo.address || '주소 정보 없음'}</span>
         </div>
       </div>
 
+      {clickInfo.totalScore && (
+              <div className="info-section">
+        <h3>🎯 투자 점수</h3>
+        <div className="info-row">
+          <span className="info-label">총점:</span>
+          <span className="info-value">{clickInfo.totalScore}점</span>
+        </div>
+        <div className="info-row">
+          <span className="info-label">수익성:</span>
+          <span className="info-value">{clickInfo.profitabilityScore}점</span>
+        </div>
+        <div className="info-row">
+          <span className="info-label">거래활성도:</span>
+          <span className="info-value">{clickInfo.activityScore}점</span>
+        </div>
+        <div className="info-row">
+          <span className="info-label">편의성:</span>
+          <span className="info-value">{clickInfo.convenienceScore}점</span>
+        </div>
+        <div className="info-row">
+          <span className="info-label">교통접근성:</span>
+          <span className="info-value">{clickInfo.transportScore}점</span>
+        </div>
+      </div>
+      
+      )}
+
+      {/* 위치 정보 */}
+      {/* <div className="info-section">
+        <h3>🎯 클릭 위치</h3>
+        <div className="info-row">
+          <span className="info-label">위도:</span>
+          <span className="info-value">{clickInfo.lat}</span>
+        </div>
+        <div className="info-row">
+          <span className="info-label">경도:</span>
+          <span className="info-value">{clickInfo.lng}</span>
+        </div>
+      </div> */}
+
+
+
       {/* PNU 정보 */}
-      {clickInfo.pnu && (
+      {/* {clickInfo.pnu && (
         <div className="info-section">
           <h3>🏷️ 필지 정보</h3>
           <div className="info-row">
@@ -92,7 +119,7 @@ const LandInfoPanel: React.FC<LandInfoPanelProps> = ({ clickInfo, loading}) => {
             <span className="info-value">{clickInfo.pnu}</span>
           </div>
         </div>
-      )}
+      )} */}
 
       {/* 토지 상세 정보 */}
       {detailsLoading ? (
@@ -143,26 +170,26 @@ const LandInfoPanel: React.FC<LandInfoPanelProps> = ({ clickInfo, loading}) => {
             </div>
           )}
         </div>
-      ) : clickInfo.pnu ? (
+      ) : clickInfo ? (
         <div className="info-section">
           <h3>🏠 토지 상세</h3>
           <div className="info-placeholder">
             <p>상세 정보를 가져올 수 없습니다</p>
             <p style={{ fontSize: '0.8rem', color: '#888' }}>
-              (API 연동 개발 중)
+              (개발 중)
             </p>
           </div>
         </div>
       ) : null}
 
       {/* 추가 정보 안내 */}
-      {!clickInfo.pnu && (
+      {/* {!clickInfo.pnu && (
         <div className="highlight-box">
           <strong>💡 안내</strong>
           토지 경계 내의 지점을 클릭하시면<br/>
           더 자세한 토지 정보를 확인할 수 있습니다.
         </div>
-      )}
+      )} */}
     </div>
   );
 }

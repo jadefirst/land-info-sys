@@ -3,7 +3,11 @@ export interface ClickInfo {
   lat: number;
   lng: number;
   address?: string;
-  pnu?: string;
+  totalScore?: number;           
+  profitabilityScore?: number;  
+  activityScore?: number;        
+  convenienceScore?: number;     
+  transportScore?: number; 
 }
 
 export interface LandInfo {

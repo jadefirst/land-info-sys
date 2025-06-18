@@ -10,44 +10,20 @@ if(!API_KEY) {
 }
 
 /**
- * 좌표를 주소로 변환
+ * 좌표 api
  */
-export const getAddressFromCoordinates = async(lat: number, lng: number): Promise<ClickInfo> => {
-    try {
-        const response = await fetch(
-        `/api/req/address?service=address&request=getAddress&key=${API_KEY}&point=${lng},${lat}&type=parcel&zipcode=true&simple=false`
-        );
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-    }
+export const getInvestmentScore = async(lat: number, lng: number) => {
+  const response = await fetch('http://localhost:8085/api/investment/score', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ lat, lng})
+  })
 
-    const data: VWorldAddressResponse = await response.json()
-        console.log('data 좌표를 주소로 변환 ',data)
+  if(!response.ok) {
+     throw new Error('투자점수 조회 실패');
+  }
 
-    if(data.response.status === 'OK' && data.response.result && data.response.result.length > 0 ) {
-        const result = data.response.result[0]
-        console.log('result ::::::::::',result)
-        return {
-            lat,
-            lng,
-            address: result.text,
-            pnu: result.structure?.parcel || '없음'
-        }
-    }else {
-        return {
-            lat,
-            lng,
-            address: '주소를 찾을 수 없습니다'
-        }
-}
-    } catch (error) {
-        console.error('주소 조회 실패:', error);
-        return {
-            lat,
-            lng,
-            address: '주소 조회 중 오류가 발생했습니다.'
-        }
-    }
+  return await response.json();
 }
 
 /**
@@ -92,7 +68,7 @@ export const getLandDetailsByPNU = async (pnu: string): Promise<LandInfo | null>
 export const getCoordinatesFromAddress = async (address: string): Promise<{lat: any, lng: any} | null> => {
  try {
     const response = await fetch(
-        `http://api.vworld.kr/req/address?service=address&request=getCoord&key=${API_KEY}&address=${encodeURIComponent(address)}&simple=false&crs=epsg:4326`
+        `/api/req/address?service=address&request=getCoord&key=${API_KEY}&address=${encodeURIComponent(address)}&simple=false&crs=epsg:4326`
     )
     if(!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
