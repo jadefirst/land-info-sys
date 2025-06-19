@@ -60,14 +60,15 @@ const MapComponent: React.FC<MapComponentProps> = ({ onLocationClick, loading })
       
       <div className="map-wrapper">
         <MapContainer
-          center={[37.5665, 126.9780] as [number, number]} 
+          {...({center :[37.5665, 126.9780], zoom: 13} as any)} 
           zoom={13}
           style={{ height: '100%', width: '100%' }}
         >
           {/* VWorld 배경지도 */}
           <TileLayer
-            url={`https://api.vworld.kr/req/wmts/1.0.0/${VWORLD_API_KEY}/Base/{z}/{y}/{x}.png`}
-            maxZoom={19}
+            {...({ url :`https://api.vworld.kr/req/wmts/1.0.0/${VWORLD_API_KEY}/Base/{z}/{y}/{x}.png`,
+            maxZoom: 19
+            } as any)}
           />
           
           {/* 클릭 이벤트 핸들러 */}
