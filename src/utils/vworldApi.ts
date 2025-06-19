@@ -1,8 +1,3 @@
-import type { LandInfo, ApiError } from "./land";
-
-
-
-
 /**
  * 좌표 api
  */
