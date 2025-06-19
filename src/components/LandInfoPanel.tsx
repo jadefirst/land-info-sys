@@ -1,7 +1,6 @@
 
 import React, { useState } from 'react';
 import type { ClickInfo, LandInfo } from '../utils/land';
-import { formatArea, formatPrice } from '../utils/vworldApi';
 
 
 interface LandInfoPanelProps {
@@ -150,7 +149,7 @@ const LandInfoPanel: React.FC<LandInfoPanelProps> = ({ clickInfo}) => {
           {landDetails.landDetails.area && (
             <div className="info-row">
               <span className="info-label">면적:</span>
-              <span className="info-value">{formatArea(landDetails.landDetails.area)}</span>
+              {/* <span className="info-value">{formatArea(landDetails.landDetails.area)}</span> */}
             </div>
           )}
           {landDetails.landDetails.landType && (
@@ -162,7 +161,7 @@ const LandInfoPanel: React.FC<LandInfoPanelProps> = ({ clickInfo}) => {
           {landDetails.landDetails.publicPrice && (
             <div className="info-row">
               <span className="info-label">공시지가:</span>
-              <span className="info-value">{formatPrice(landDetails.landDetails.publicPrice)} /㎡</span>
+              {/* <span className="info-value">{formatPrice(landDetails.landDetails.publicPrice)} /㎡</span> */}
             </div>
           )}
           {landDetails.landDetails.ownerType && (
