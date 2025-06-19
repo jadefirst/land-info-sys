@@ -1,5 +1,6 @@
 
 export interface ClickInfo {
+  pnu(pnu: any): unknown;
   lat: number;
   lng: number;
   address?: string;

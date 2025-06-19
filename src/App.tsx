@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import LandInfoPanel from './components/LandInfoPanel'
 import MapComponentView from './components/MapComponentPanel';
 import type { ClickInfo } from './utils/land';
@@ -6,7 +6,7 @@ import type { ClickInfo } from './utils/land';
 function App() {
 
 const [clickInfo, setClickInfo] = useState<ClickInfo | null>(null);
-const [loading, setLoading] = useState(false);
+const [loading] = useState(false);
 
 const handleLocationClick = (info: ClickInfo) => {
   setClickInfo(info)

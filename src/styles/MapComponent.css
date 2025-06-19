@@ -95,6 +95,7 @@
   border: 1px solid #e2e8f0 !important;
 }
 
+
 /* 반응형 */
 @media (max-width: 768px) {
   .map-container {

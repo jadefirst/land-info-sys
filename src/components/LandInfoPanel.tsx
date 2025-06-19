@@ -1,7 +1,7 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import type { ClickInfo, LandInfo } from '../utils/land';
-import { getLandDetailsByPNU, formatArea, formatPrice } from '../utils/vworldApi';
+import { formatArea, formatPrice } from '../utils/vworldApi';
 
 
 interface LandInfoPanelProps {
@@ -11,10 +11,10 @@ interface LandInfoPanelProps {
 
 
 
-const LandInfoPanel: React.FC<LandInfoPanelProps> = ({ clickInfo, loading}) => {
-  const [landDetails, setLandDetails] = useState<LandInfo | null>(null);
-  const [detailsLoading, setDetailsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+const LandInfoPanel: React.FC<LandInfoPanelProps> = ({ clickInfo}) => {
+  const [landDetails] = useState<LandInfo | null>(null);
+  const [detailsLoading] = useState(false);
+  const [error] = useState<string | null>(null);
 
 
     // PNU가 있을 때 상세 정보 조회
@@ -44,7 +44,9 @@ const LandInfoPanel: React.FC<LandInfoPanelProps> = ({ clickInfo, loading}) => {
    
    
  if (!clickInfo) {
-  return <div>클릭하세요</div>;
+  return <div className='clickhaseo'>
+    <span className='clickhaseoSpan'></span>
+  </div>;
 } 
    
    
@@ -70,26 +72,26 @@ const LandInfoPanel: React.FC<LandInfoPanelProps> = ({ clickInfo, loading}) => {
 
       {clickInfo.totalScore && (
               <div className="info-section">
-        <h3>🎯 투자 점수</h3>
+        <h3>🎯 예상 투자 점수</h3>
         <div className="info-row">
           <span className="info-label">총점:</span>
           <span className="info-value">{clickInfo.totalScore}점</span>
         </div>
         <div className="info-row">
-          <span className="info-label">수익성:</span>
-          <span className="info-value">{clickInfo.profitabilityScore}점</span>
+          <span className="info-label">수익성(40%):</span>
+          <span className="info-value">{clickInfo.profitabilityScore}점 </span>
         </div>
         <div className="info-row">
-          <span className="info-label">거래활성도:</span>
-          <span className="info-value">{clickInfo.activityScore}점</span>
+          <span className="info-label">거래활성도(30%):</span>
+          <span className="info-value">{clickInfo.activityScore}점 </span>
         </div>
         <div className="info-row">
-          <span className="info-label">편의성:</span>
-          <span className="info-value">{clickInfo.convenienceScore}점</span>
+          <span className="info-label">편의성(20%):</span>
+          <span className="info-value">{clickInfo.convenienceScore}점 </span>
         </div>
         <div className="info-row">
-          <span className="info-label">교통접근성:</span>
-          <span className="info-value">{clickInfo.transportScore}점</span>
+          <span className="info-label">교통접근성(10%):</span>
+          <span className="info-value">{clickInfo.transportScore}점 </span>
         </div>
       </div>
       

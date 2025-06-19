@@ -68,6 +68,8 @@ body {
 
 /* 깔끔한 헤더 */
 .app-header {
+  width: 400px;
+  border-radius: 8px;
   background: #ffffff;
   border-bottom: 1px solid #e2e8f0;
   padding: 20px 24px;
@@ -75,8 +77,8 @@ body {
 }
 
 .app-header h1 {
-  font-size: 1.75rem;
-  font-weight: 700;
+  font-size: 1.65rem;
+  font-weight: 500;
   margin-bottom: 6px;
   color: #4a5568;
   display: flex;
@@ -90,7 +92,8 @@ body {
   font-weight: 500;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+
 }
 
 .status-indicator {

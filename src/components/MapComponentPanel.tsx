@@ -29,11 +29,11 @@ function MapClickHandler({
         console.error('clickInfo ::::::::::::', clickInfo);
       } catch (error) {
         console.error('위치 정보 조회 실패:', error);
-        onLocationClick({
-          lat,
-          lng,
-          address: '위치 정보 조회 중 오류가 발생했습니다'
-        });
+        // onLocationClick({
+        //   lat,
+        //   lng,
+        //   address: '위치 정보 조회 중 오류가 발생했습니다'
+        // });
       } finally {
         setLoading(false);
       }
