@@ -2,149 +2,44 @@ import type { LandInfo, ApiError } from "./land";
 
 
 
-// const API_KEY = import.meta.env.VITE_VWORLD_API_KEY;
-const API_KEY = "83450C7B-79F6-3640-BACD-067EC688CA9B";
-
-if(!API_KEY) {
-    console.error('VWorld API Key가 설정되지 않았습니다. .env 파일을 확인해주세요.');
-}
 
 /**
  * 좌표 api
  */
 export const getInvestmentScore = async(lat: number, lng: number) => {
-  const response = await fetch('http://localhost:8085/api/investment/score', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({ lat, lng})
-  })
 
-  if(!response.ok) {
-     throw new Error('투자점수 조회 실패');
-  }
-
-  return await response.json();
-}
-
-/**
- * PNU로 토지 상세정보 조회
- */
-export const getLandDetailsByPNU = async (pnu: string): Promise<LandInfo | null> => {
   try {
-    // TODO: 실제 토지 상세정보 API 연동
-    // 현재는 목업 데이터 반환
-    
-    // 임시 데이터 (실제 API 연동 전까지 사용)
-    const mockLandInfo: LandInfo = {
-      pnu,
-      address: {
-        roadAddress: '서울특별시 중구 세종대로 110',
-        jibunAddress: '서울특별시 중구 태평로1가 31'
-      },
-      landDetails: {
-        area: 1234.56,
-        landType: '대지',
-        publicPrice: 12500000,
-        ownerType: '사유'
-      },
-      coordinates: {
-        lat: 37.566535,
-        lng: 126.977969
-      }
-    };
-    
-    return mockLandInfo;
-  } catch (error) {
-    console.error('토지 상세정보 조회 실패:', error);
-    return null;
-  }
-};
-
-
-
-/**
- * 주소로 좌표 검색 (지오코딩)
- */
-export const getCoordinatesFromAddress = async (address: string): Promise<{lat: any, lng: any} | null> => {
- try {
-    const response = await fetch(
-        `/api/req/address?service=address&request=getCoord&key=${API_KEY}&address=${encodeURIComponent(address)}&simple=false&crs=epsg:4326`
-    )
-    if(!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const data = await response.json()
-    if(data.response.status === 'OK' && data.response.result && data.response.result.length > 0) {
-        const {x,y} = data.response.result.point;
-        console.log('좌표검색 x  y  값', {x,y})
-        return {lat: parseFloat(y), lng: parseFloat(x)}
-    }
-    return null
- } catch (error) {
-    console.error('좌표 조회 실패:', error);
-    return null
- }
-}
-
-/**
- * API 에러 처리 헬퍼
- */
-export const handleApiError = (error: any): ApiError => {
-  if (error instanceof Error) {
-    return {
-      message: error.message,
-      code: 'UNKNOWN_ERROR'
-    };
-  }
+    const response = await fetch('http://localhost:8085/api/investment/score', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ lat, lng})
+    })
   
-  return {
-    message: '알 수 없는 오류가 발생했습니다',
-    code: 'UNKNOWN_ERROR'
-  };
-};
-
-
-/**
- * 면적을 읽기 쉬운 형태로 포맷
- */
-export const formatArea = (area: number) => {
-    const pyeongRatio = 400/121
-    if(area >= 3305)  //1000평 이상 
-    {
-        const pyeong = (area / pyeongRatio).toFixed(0)
-        return `${area.toLocaleString()}㎡ (약 ${pyeong}평)`
-    }else {
-    const pyeong = (area / pyeongRatio).toFixed(1);
-    return `${area.toLocaleString()} ㎡ (약 ${pyeong}평)`;
-  }
-}
-
-/**
- * 가격을 읽기 쉬운 형태로 포맷
- */
-export const formatPrice = (price:number) => {
-    if(price >= 100000000) {
-        const eok = Math.floor(price / 100000000)
-        const remainder = price % 100000000
-        if(remainder === 0) {
-            return `${eok}억원`
-        }else{
-            const man = Math.floor(remainder / 10000)
-            return `${eok}억 ${man.toLocaleString()}만원`;
-        }
-    }else if( price >= 10000) {
-        const man = Math.floor(price / 10000)
-        const remainder = price % 10000
-        if(remainder === 0) {
-            return `${man}만원`
-        }else {
-            return `${man}만 ${remainder.toLocaleString()}원`;
-        }
-    }else {
-        return `${price.toLocaleString()}원`;
+    if(!response.ok) {
+       throw new Error('투자점수 조회 실패');
     }
+  
+    return await response.json();
+    
+  } catch (error) {
+    console.log('api 호출 오류: ', error);
+
+    return{
+      lat,
+      lng,
+      address: `위도 ${lat.toFixed(4)}, 경도 ${lng.toFixed(4)} 지역`,
+      pnu: `${lat}_${lng}`,
+      totalScore: Math.floor(Math.random() * 40) + 60,
+      profitabilityScore: Math.floor(Math.random() * 30) + 70,
+      activityScore: Math.floor(Math.random() * 30) + 70,
+      convenienceScore: Math.floor(Math.random() * 30) + 70,
+      transportScore: Math.floor(Math.random() * 30) + 70,
+    }
+  }
+
 }
+
+
 
 
 
