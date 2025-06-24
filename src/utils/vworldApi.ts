@@ -4,7 +4,8 @@
 export const getInvestmentScore = async(lat: number, lng: number) => {
 
   try {
-    const response = await fetch('http://localhost:8085/api/investment/score', {
+    // const response = await fetch('http://localhost:8085/api/investment/score', {
+    const response = await fetch('https://land-info-sys-api.onrender.com/api/investment/score', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ lat, lng})
