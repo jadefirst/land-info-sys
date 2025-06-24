@@ -20,15 +20,12 @@ export const getInvestmentScore = async(lat: number, lng: number) => {
     console.log('api 호출 오류: ', error);
 
     return{
-      lat,
-      lng,
-      address: `위도 ${lat.toFixed(4)}, 경도 ${lng.toFixed(4)} 지역`,
-      pnu: `${lat}_${lng}`,
-      totalScore: Math.floor(Math.random() * 40) + 60,
-      profitabilityScore: Math.floor(Math.random() * 30) + 70,
-      activityScore: Math.floor(Math.random() * 30) + 70,
-      convenienceScore: Math.floor(Math.random() * 30) + 70,
-      transportScore: Math.floor(Math.random() * 30) + 70,
+      address: `수도권 지역`,
+      totalScore: '-',
+      profitabilityScore: '-',
+      activityScore: '-',
+      convenienceScore: '-',
+      transportScore: '-',
     }
   }
 

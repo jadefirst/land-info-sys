@@ -96,4 +96,4 @@ CompletableFuture<String> transport = CompletableFuture.supplyAsync(() -> getTra
 
 ---
 
-개발 기간: 약 2개월 (백엔드 중심, 프론트엔드 연동 포함)
+개발 기간: 약 2개월
